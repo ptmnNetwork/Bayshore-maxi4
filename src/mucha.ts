@@ -12,10 +12,11 @@ export default class MuchaModule extends Module {
 
         app.use(express.urlencoded({
             type: '*/*',
-            extended: true
+            extended: true,
+            limit: '50mb', // idk.. i got PayloadTooLargeError: request entity too large (adding this solve the problem)
         }))
 
-        app.post('/updatacheck.do', (req, res) => {
+        app.post('/mucha_front/updatacheck.do', (req, res) => {
             let response = {
                 RESULTS: "001",
                 UPDATE_VER_1: req.body.gameVer,
@@ -36,9 +37,9 @@ export default class MuchaModule extends Module {
             res.status(200).send(decResponse);
         })
 
-        app.post('/boardauth.do', (req, res) => {
-            let serverTime = moment().format('YYYYMMDDHHmm');
-            let utcServerTime = moment().utc().format('YYYYMMDDHHmm');
+        app.post('/mucha_front/boardauth.do', (req, res) => {
+            let serverTime = moment().format('YYYYMMDDHHmmss');
+            let utcServerTime = moment().utc().format('YYYYMMDDHHmmss');
 
             let shopName = Config.getConfig().shopName;
             let shopNick = Config.getConfig().shopNickname;
@@ -72,7 +73,7 @@ export default class MuchaModule extends Module {
                 PLACE_ID: req.body.placeId,
                 PREFECTURE_ID: "14",
                 SERVER_TIME: serverTime,
-                UTC_SERVER_TIME: utcServerTime,
+                SERVER_TIME_UTC: utcServerTime,
                 SHOP_NAME: shopName,
                 SHOP_NAME_EN: shopName,
                 SHOP_NICKNAME: shopNick,

@@ -6,8 +6,8 @@ import iconv from "iconv-lite";
 import { Config } from "./config";
 
 // TODO: Move this into the config
-const STARTUP_URI = `https://${Config.getConfig().serverIp || "localhost"}:9002`;
-const STARTUP_HOST = `${Config.getConfig().serverIp || "localhost"}:9002`;
+const STARTUP_URI = `https://${Config.getConfig().serverIp || "localhost"}:5555`;
+const STARTUP_HOST = `${Config.getConfig().serverIp || "localhost"}:5555`;
 
 export default class AllnetModule extends Module {
     register(app: Application): void {

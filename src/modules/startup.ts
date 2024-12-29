@@ -1,27 +1,27 @@
 import { Application } from "express";
 import {Module} from "module";
 import { Config } from "../config";
-import * as wm from "../wmmt/wm.proto";
+import * as v388 from "../wmmt/v388.proto";
 
 export default class StartupModule extends Module {
     register(app: Application): void {
         app.post('/method/register_system_info', (req, res) => {
             let msg = {
-                error: wm.wm.protobuf.ErrorCode.ERR_SUCCESS,
+                error: v388.v388.protobuf.ErrorCode.ERR_SUCCESS,
                 regionId: 1,
                 placeId: "JPN0123",
-                allowedClientLogTypes: [],
-                ghostSelectionMinRedoWait: 30,
-                ghostSelectionMaxRedoWait: 4000,
-                featureVersion: {
-                    version: 9,
-                    year: 2022,
-                    month: 7,
-                    pluses: 0,
-                    releaseAt: 0 // idk what this is
-                }
+                pajeroDiscloseAt: 0,
+                carCampaignStartAt: 0,
+                carCampaignEndAt: 0,
+                teamSuspensionAnnouncementStartAt: 0,
+                teamSuspensionStartAt: 0,
+                successionCloseAnnouncementStartAt: 0,
+                successionCloseAt: 0,
+                successionCloseAnnouncementEndAt: 0,
+                faceRecognitionPermitted: false,
+                latestCompetitionId: 0
             }
-            let resp = wm.wm.protobuf.RegisterSystemInfoResponse.encode(msg);
+            let resp = v388.v388.protobuf.RegisterSystemInfoResponse.encode(msg);
             let end = resp.finish();
             let r = res
                 .header('Server', 'v388 wangan')
@@ -33,14 +33,14 @@ export default class StartupModule extends Module {
 
         app.get('/resource/place_list', (req, res) => {
             console.log('place list');
-            let places: wm.wm.protobuf.Place[] = [];
-            places.push(new wm.wm.protobuf.Place({
+            let places: v388.v388.protobuf.Place[] = [];
+            places.push(new v388.v388.protobuf.Place({
                 placeId: "JPN0123",
                 regionId: 1,
                 shopName: Config.getConfig().shopName,
                 country: "JPN"
             }));
-            let resp = wm.wm.protobuf.PlaceList.encode({places});
+            let resp = v388.v388.protobuf.PlaceList.encode({places});
             let end = resp.finish();
             let r = res
                 .header('Server', 'v388 wangan')
@@ -52,12 +52,12 @@ export default class StartupModule extends Module {
 
         app.post('/method/ping', (req, res) => {
             console.log('ping');
-            let body = wm.wm.protobuf.PingRequest.decode(req.body);
+            let body = v388.v388.protobuf.PingRequest.decode(req.body);
             let ping = {
-                error: wm.wm.protobuf.ErrorCode.ERR_SUCCESS,
+                error: v388.v388.protobuf.ErrorCode.ERR_SUCCESS,
                 pong: body.ping || 1
             };
-            let resp = wm.wm.protobuf.PingResponse.encode(ping);
+            let resp = v388.v388.protobuf.PingResponse.encode(ping);
             let end = resp.finish();
             let r = res
                 .header('Server', 'v388 wangan')
