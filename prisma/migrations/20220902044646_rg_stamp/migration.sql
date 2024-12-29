@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE "Car" ALTER COLUMN "rgStamp" SET DEFAULT 1,
-ALTER COLUMN "stLoseBits" SET DEFAULT 0;

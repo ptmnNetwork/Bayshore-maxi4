@@ -4,7 +4,6 @@ import { unzipSync } from "zlib";
 import { Module } from "./module";
 import iconv from "iconv-lite";
 import { Config } from "./config";
-import * as common from "./modules/util/common";
 
 // TODO: Move this into the config
 const STARTUP_URI = `https://${Config.getConfig().serverIp || "localhost"}:9002`;
@@ -13,8 +12,7 @@ const STARTUP_HOST = `${Config.getConfig().serverIp || "localhost"}:9002`;
 export default class AllnetModule extends Module {
     register(app: Application): void {
         app.use(bodyParser.raw({
-            type: '*/*',
-            limit: '50mb' // idk.. i got PayloadTooLargeError: request entity too large (adding this solve the problem)
+            type: '*/*'
         }));
 
         app.use("/sys/servlet/PowerOn", function(req, res, next) {
@@ -72,27 +70,22 @@ export default class AllnetModule extends Module {
             const adjusted = now;
 
             let shopName = Config.getConfig().shopName;
-            let shopNick = Config.getConfig().shopName;
+            let shopNick = Config.getConfig().shopNickname;
             let regionName = Config.getConfig().regionName;
-            let placeId = Config.getConfig().placeId;
-            let country = Config.getConfig().country;
-            let regionId = common.sanitizeInputNotZero(Number(Config.getConfig().regionId)) || 1;
-
-            // TODO: Implement board authentication here.
         
             const resParams = {
                 stat: 1,
                 uri: STARTUP_URI,
                 host: STARTUP_HOST,
-                place_id: placeId,
+                place_id: "JPN0123",
                 name: shopName,
                 nickname: shopNick,
-                region0: regionId,
+                region0: "1",
                 region_name0: regionName,
                 region_name1: "X",
                 region_name2: "Y",
                 region_name3: "Z",
-                country: country,
+                country: "JPN",
                 allnet_id: "456",
                 timezone: "002:00",
                 setting: "",

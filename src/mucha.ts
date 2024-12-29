@@ -4,7 +4,7 @@ import moment from "moment";
 import { Config } from "./config";
 import { Module } from "./module";
 
-const PORT = process.env.MUCHA_PORT !== undefined ? parseInt(process.env.MUCHA_PORT) : 10082;
+const PORT = 10082;
 
 export default class MuchaModule extends Module {
     register(app: Application): void {
@@ -12,8 +12,7 @@ export default class MuchaModule extends Module {
 
         app.use(express.urlencoded({
             type: '*/*',
-            extended: true,
-            limit: '50mb', // idk.. i got PayloadTooLargeError: request entity too large (adding this solve the problem)
+            extended: true
         }))
 
         app.post('/updatacheck.do', (req, res) => {

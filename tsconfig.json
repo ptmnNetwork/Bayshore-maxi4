@@ -5,10 +5,7 @@
         "strict": true,
         "lib": ["esnext"],
         "esModuleInterop": true,
-        "allowJs": true,
-        "types":[
-            "long"
-        ]
+        "allowJs": true
     },
     "include": ["src/**/*"],
     "exclude": ["src/wmmt/**/*"]

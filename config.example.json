@@ -1,19 +1,6 @@
 {
-    "placeId": "JPN0123",
     "shopName": "Bayshore",
-    "shopNickname": "Bayshore",
-    "regionId": "1",
-    "country": "JPN",
-    "regionName": "JPN0123",
-    "serverIp": "127.0.0.1",
-    "gameOptions": {
-        "grantFullTuneTicketToNewUsers": 5, 
-        "giftCarsFullyTuned": 0, 
-        "scratchEnabled": 1, 
-        "scratchType": 0, 
-        "giveMeterReward": 0,
-		"newCardsBanned": 0,
-        "revisionCheck": 1,
-		"enableScreenshot": 0
-    }
+    "shopNickname": "BSH",
+    "regionName": "Bayshore",
+    "serverIp": "127.0.0.1"
 }
